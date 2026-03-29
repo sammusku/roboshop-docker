@@ -1,6 +1,7 @@
 FROM node:20
 WORKDIR /app
-COPY package.json . #(. - current directory /app)
+#(. - current directory /app)
+COPY package.json . 
 COPY server.js .
 RUN npm install
 ENV MONGO="true" \
