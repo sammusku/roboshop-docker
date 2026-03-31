@@ -8,6 +8,7 @@ services:
      - redis
      - mongodb
   
+
   mongodb:
    build: ./Mongodb
    image: mongodb:1.0.0
@@ -16,7 +17,15 @@ services:
   redis:
    image: redis:7.0   #pull redis:7 vesrion from dockerhub
    container_name: redis
-
+  
+  cart:
+   # builds image from Dockerfile and tags as user:1.0.0
+   build: ./cart
+   image: cart:1.0.0
+   container_name: cart
+   depends_on:
+     - redis
+  
   catalogue:
    build: ./catalogue
    image: catalogue:1.0.0
