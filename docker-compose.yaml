@@ -9,7 +9,7 @@ services:
      - mongodb
   
   mongodb:
-   build: ./mongodb
+   build: ./Mongodb
    image: mongodb:1.0.0
    container_name: mongodb
 
