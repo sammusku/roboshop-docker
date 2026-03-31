@@ -17,7 +17,13 @@ services:
    image: redis:7.0   #pull redis:7 vesrion from dockerhub
    container_name: redis
 
-
+  catalogue:
+   build: ./catalogue
+   image: catalogue:1.0.0
+   container_name: catalogue
+   depends_on:
+     - mongodb
+    
   frontend:
    build: ./frontend
    image: frontend:1.0.0
