@@ -13,10 +13,14 @@ services:
    build: ./Mongodb
    image: sam123yuktha/mongodb:1.0.0
    container_name: mongodb
+   volumes:
+    - mongodb:/data/db
 
   redis:
    image: redis:7.0   #pull redis:7 vesrion from dockerhub
    container_name: redis
+   volumes:
+    - redis:/data
   
   cart:
    # builds image from Dockerfile and tags as user:1.0.0
@@ -46,6 +50,8 @@ services:
    build: ./mysql
    image: sam123yuktha/mysql:1.0.0
    container_name: mysql
+   volumes:
+    - mysql:/var/lib/mysql
   
   payment:
    build: ./payment
@@ -70,6 +76,8 @@ services:
     RABBITMQ_DEFAULT_USER: roboshop
     RABBITMQ_DEFAULT_PASS: roboshop123
    container_name: rabbitmq
+   volumes:
+     - rabbitmq:/var/lib/rabbitmq
   
 
     
@@ -91,3 +99,11 @@ networks:
  default:
   driver: bridge
   name: roboshop
+  external: false # if true, you need to create network manually
+
+volumes:
+  - mongodb    #docker volume create mongodb/redis/mysql/rabbitmq
+  - redis
+  - mysql
+  - rabbitmq
+
