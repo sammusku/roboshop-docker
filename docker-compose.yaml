@@ -105,5 +105,5 @@ volumes:   #docker volume create mongodb/redis/mysql/rabbitmq
   redis
   mysql
   rabbitmq
-  mongodb 
+  Mongodb 
 
