@@ -2,7 +2,7 @@ services:
   user:
    # builds image from Dockerfile and tags as user:1.0.0
    build: ./user
-   image: user:1.0.0
+   image: sam123yuktha/user:1.0.0
    container_name: user
    depends_on:
      - redis
@@ -11,7 +11,7 @@ services:
 
   mongodb:
    build: ./Mongodb
-   image: mongodb:1.0.0
+   image: sam123yuktha/mongodb:1.0.0
    container_name: mongodb
 
   redis:
@@ -21,7 +21,7 @@ services:
   cart:
    # builds image from Dockerfile and tags as user:1.0.0
    build: ./cart
-   image: cart:1.0.0
+   image: sam123yuktha/cart:1.0.0
    container_name: cart
    depends_on:
      - redis
@@ -29,14 +29,14 @@ services:
   
   catalogue:
    build: ./catalogue
-   image: catalogue:1.0.0
+   image: sam123yuktha/catalogue:1.0.0
    container_name: catalogue
    depends_on:
      - mongodb
   
   shipping:
    build: ./shipping   #maven for java
-   image: shipping:1.0.0
+   image: sam123yuktha/shipping:1.0.0
    container_name: shipping
    depends_on:
      - mysql
@@ -44,12 +44,12 @@ services:
 
   mysql:
    build: ./mysql
-   image: mysql:1.0.0
+   image: sam123yuktha/mysql:1.0.0
    container_name: mysql
   
   payment:
    build: ./payment
-   image: payment:1.0.0
+   image: sam123yuktha/payment:1.0.0
    container_name: payment
    environment:
      CART_HOST: "cart"
@@ -65,7 +65,7 @@ services:
      - user
   
   rabbitmq:
-   image: rabbitmq:3
+   image: sam123yuktha/rabbitmq:3
    environment:
     RABBITMQ_DEFAULT_USER: roboshop
     RABBITMQ_DEFAULT_PASS: roboshop123
@@ -75,7 +75,7 @@ services:
     
   frontend:
    build: ./frontend
-   image: frontend:1.0.0
+   image: sam123yuktha/frontend:1.0.0
    container_name: frontend
    ports:
      - "80:80"    #host:container
