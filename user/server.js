@@ -1,6 +1,7 @@
 const instana = require('@instana/collector');
 // init tracing
 // MUST be done before loading anything else!
+//some change
 instana({
     tracing: {
         enabled: true
@@ -247,7 +248,7 @@ redisClient.on('connect', () => {
 });
 redisClient.connect();
 
-// set up Mongo
+// set up Mongo 
 async function mongoConnect() {
     try {
         const mongoURL = process.env.MONGO_URL || 'mongodb://localhost:27017/users';
