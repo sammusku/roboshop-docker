@@ -1,10 +1,33 @@
-FROM node:20
+FROM node:20.20.2-alpine3.23 AS builder
 WORKDIR /app
-ENV MONGO="true" \
-    MONGO_URL="mongodb://mongodb:27017/users" \
-    REDIS_URL="redis://redis:6379"
-    
+
 COPY package.json .
+COPY *.js .
 RUN npm install
-COPY server.js . 
-CMD ["node","server.js"]
+
+
+FROM node:20.20.2-alpine3.23
+WORKDIR /app
+EXPOSE 8080
+COPY --from=builder /app /app 
+# This env is going to be handled in configmap in k8
+# ENV MONGO="true" \
+#     MONGO_URL="mongodb://mongodb:27017/user"
+RUN addgroup -S roboshop && adduser -S roboshop -G roboshop
+RUN chown -R roboshop:roboshop /app
+USER roboshop
+CMD ["server.js"]
+ENTRYPOINT ["node"]
+
+
+
+# FROM node:20
+# WORKDIR /app
+# ENV MONGO="true" \
+#     MONGO_URL="mongodb://mongodb:27017/users" \
+#     REDIS_URL="redis://redis:6379"
+    
+# COPY package.json .
+# RUN npm install
+# COPY server.js . 
+# CMD ["node","server.js"]
